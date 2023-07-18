@@ -23,13 +23,13 @@ app.post('/lugar', (req, res) => {
     res.status(201).json({ mensaje: 'lugar agregado exitosamente', nuevoLugar });
 });
 
-app.get('/distancia', async (req, res) => {
+app.get('/distancia', (req, res) => {
     const { placeOne, placeTwo } = req.query;
     // comprobar que existan los dos lugares
     if (!placeOne || !placeTwo) {
         res.status(400).json({ error: 'Se deben de proporcionar dos lugares para calcular su distancia' });
     }
-    await db.connect()
+    db.connect()
         .then(() => {
             ({ lat1, long1 } = db.getCoordinates(placeOne));
             ({ lat1, long1 } = db.getCoordinates(placeOne));
